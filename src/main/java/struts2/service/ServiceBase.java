@@ -9,7 +9,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ServiceBase {
-	protected Connection conn = null;
+
+	protected Connection conn;
+	
 	public ServiceBase() throws NamingException, SQLException {
 		conn = null;
     	Context initContext = new InitialContext();
@@ -19,11 +21,11 @@ public class ServiceBase {
 		 
 //    	DatabaseMetaData meta = conn.getMetaData(); // gets driver info:
 //    	result = "JDBC driver version is " + meta.getDriverVersion();
-		
 	}
 	public void closeConn() throws SQLException {
 		if (conn != null) {
 			conn.close();
 		}
 	}
+
 }

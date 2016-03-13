@@ -24,7 +24,7 @@
     </li>
 </ul>
 <br>
-    <s:url id="url" action="employees" />
-    <s:a href="%{url}">employees</s:a>
+    <s:url id="url" action="customers" />
+    <s:a href="%{url}">customers</s:a>
 </body>
 </html>

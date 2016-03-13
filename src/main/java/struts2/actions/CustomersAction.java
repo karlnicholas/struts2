@@ -15,36 +15,30 @@
  */
 package struts2.actions;
 
+import java.util.List;
+
 import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import struts2.model.Employee;
+import struts2.model.Customer;
 import struts2.service.HRService;
 
-@Action(value="employeeCreate", results={@Result(name = ActionSupport.SUCCESS, location = "employees", type = "redirectAction")})
-public class EmployeeCreateAction extends ActionSupport {
+@Actions({
+	@Action("customers") 
+})
+public class CustomersAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
-    private Employee employee;
+	private List<Customer> customers;
+    
+    public void setCustomers(List<Customer> customers) { this.customers = customers; }
+    public List<Customer> getCustomers() { return customers; }
     
     public String execute() throws Exception {
-    	if ( employee == null ) return SUCCESS;
-    	if ( employee != null ) {
-    		if ( employee.empName == null || employee.empName.trim().isEmpty() ) return SUCCESS;
-    		if ( employee.empNo == null ) return SUCCESS;
-    	}
-
     	HRService hrService = new HRService();
-    	hrService.createEmployee(employee);
+    	customers = hrService.listCustomers();
     	hrService.closeConn();
         return SUCCESS;
     }
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
 }

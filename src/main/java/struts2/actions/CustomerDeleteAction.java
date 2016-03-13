@@ -9,8 +9,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import struts2.service.HRService;
 
-@Action(value="employeeDelete", results={@Result(name = ActionSupport.SUCCESS, location = "employees", type = "redirectAction")})
-public class EmployeeDeleteAction extends ActionSupport {
+@Action(value="customerDelete", results={@Result(name = ActionSupport.SUCCESS, location = "customers", type = "redirectAction")})
+public class CustomerDeleteAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
     private String empNo;
  
@@ -23,7 +23,7 @@ public class EmployeeDeleteAction extends ActionSupport {
 
     public String execute() throws Exception {
     	HRService hrService = new HRService();
-    	hrService.deleteEmployee(new BigDecimal(empNo));
+    	hrService.deleteCustomer(new BigDecimal(empNo));
     	hrService.closeConn();
         return SUCCESS;
     }
