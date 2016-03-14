@@ -10,32 +10,6 @@ import java.util.List;
 
 public abstract class DaoBase<T extends DaoBase<T>> {
 	
-	public List<T> listForDaoType(Connection conn, ListForType type) throws SQLException {
-	    // Create a Statement
-	    List<T> list = new ArrayList<T>(); 
-
-        PreparedStatement ps = 
-        		conn.prepareStatement ("select t.* from " + getTable() + " t where t."+type.getWhereColumn()+" = ?");
-        ps.setLong(1, type.getWhereId());
-	    ResultSet rset = ps.executeQuery();
-	    // Select first_name and last_name column from the customers table
-	    try {
-	    
-	    	while ( rset.next() ) {
-				T base = makeNewT();
-				base.decodeResultSet(rset);
-	    		list.add(base);
-	    	}
-	    	for ( T base: list) {
-				base.fetchEagerDependencies(conn);
-	    	}
-		    return list;
-	    } finally {
-		    // Close the RseultSet
-		    rset.close();
-	    }
-	}
-
 	public T findById(Connection conn, Long id) throws SQLException {
 
         PreparedStatement ps = 

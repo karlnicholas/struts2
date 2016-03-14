@@ -31,7 +31,7 @@
             <td><s:property value="EXPIRES_ON" /></td>
             <td><s:property value="ADMIN_USER" /></td>
             <td>
-              <form action="ordersByUser">
+              <form action="userOrders">
                 <input type="hidden" name="userId" value="<s:property value='USER_ID'/>" /><input type="submit" value="Orders" />
               </form>
             </td>
@@ -41,30 +41,29 @@
     </tbody>
   </table>
   <br />
-  <s:set name="ordersTest" value="orders"/>
-  <s:if test="%{#ordersTest != null}">
-  <table>
-    <thead>
-      <tr>
-        <th>CUSTOMER</th>
-        <th>ORDER_TOTAL</th>
-        <th>ORDER_TIMESTAMP</th>
-        <th>USER_ID</th>
-      </tr>
-    </thead>
-    <tbody>
-      <s:iterator value="orders">
+  <s:if test="userOrders != null"> 
+    <table>
+      <thead>
         <tr>
-          <s:div>
-            <td><s:property value="customer.CUST_FIRST_NAME" /> <s:property value="customer.CUST_LAST_NAME" /></td>
-            <td><s:property value="ORDER_TOTAL" /></td>
-            <td><s:property value="ORDER_TIMESTAMP" /></td>
-            <td><s:property value="user.USER_NAME" /></td>
-          </s:div>
+          <th>Customer</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th>User</th>
         </tr>
-      </s:iterator>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <s:iterator value="userOrders.orders">
+          <tr>
+            <s:div>
+              <td><s:property value="customer.CUST_FIRST_NAME" /> <s:property value="customer.CUST_LAST_NAME" /></td>
+              <td><s:property value="ORDER_TOTAL" /></td>
+              <td><s:property value="ORDER_TIMESTAMP" /></td>
+              <td><s:property value="user.USER_NAME" /></td>
+            </s:div>
+          </tr>
+        </s:iterator>
+      </tbody>
+    </table>
   </s:if>
 </body>
 </html>

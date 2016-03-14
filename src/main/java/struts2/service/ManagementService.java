@@ -11,6 +11,7 @@ package struts2.service;
  **/
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -29,17 +30,24 @@ public class ManagementService extends ServiceBase {
 		return new User().list(conn);
 	}
 	
-	public List<Order> listOrdersForUser(final Long userId) throws SQLException {
-		ListForType userType = new ListForType() {
+	public User listOrdersForUser(final Long userId) throws SQLException, InstantiationException, IllegalAccessException {
+		ListForType<User, Order> userType = new ListForType<User, Order>() {
 			@Override
-			public Long getWhereId() {
+			public Long getParentId() {
 				return userId;
 			}
+
 			@Override
-			public String getWhereColumn() {
+			public String getJoinColumn() {
 				return Order.USER_ID_COLUMN;
 			}
+
+			@Override
+			public List<Order> getCollection(User parent) {
+				if ( parent.getOrders() == null ) parent.setOrders(new ArrayList<Order>());
+				return parent.getOrders();
+			}
 		};
-		return new Order().listForDaoType(conn, userType);
+		return userType.listForDaoType(conn, User.class, Order.class );
 	}
 }

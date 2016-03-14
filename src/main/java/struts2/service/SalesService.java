@@ -17,8 +17,9 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
-import oracle.jdbc.*;
+import struts2.dao.ListForType;
 import struts2.model.Customer;
+import struts2.model.Order;
 
 public class SalesService extends ServiceBase {
 
@@ -35,6 +36,27 @@ public class SalesService extends ServiceBase {
 	
 	public List<Customer> listCustomers() throws SQLException, NamingException {
 		return new Customer().list(conn);
+	}
+
+	public Customer listOrdersForCustomer(final Long customerId) throws InstantiationException, IllegalAccessException, SQLException {
+		ListForType<Customer, Order> listForType = new ListForType<Customer, Order>() {
+			@Override
+			public Long getParentId() {
+				return customerId;
+			}
+
+			@Override
+			public String getJoinColumn() {
+				return Order.CUSTOMER_ID_COLUMN;
+			}
+
+			@Override
+			public List<Order> getCollection(Customer parent) {
+				if ( parent.getOrders() == null ) parent.setOrders(new ArrayList<Order>());
+				return parent.getOrders();
+			}
+		};
+		return listForType.listForDaoType(conn, Customer.class, Order.class);
 	}
 	
 }

@@ -24,7 +24,6 @@ public abstract class DemoOrdersDao<T extends DaoBase<T>> extends DaoBase<T> {
 	private Date ORDER_TIMESTAMP;	// DATE,
 	private Long USER_ID;			// NUMBER
 
-	@Override
 	public void decodeResultSet(ResultSet rset) throws SQLException {
 		ORDER_ID = rset.getLong(1);				// NUMBER NOT NULL,
 		CUSTOMER_ID = rset.getLong(2);			// NUMBER NOT NULL,
@@ -33,11 +32,10 @@ public abstract class DemoOrdersDao<T extends DaoBase<T>> extends DaoBase<T> {
 		USER_ID = rset.getLong(5);				// NUMBER
 	}
 
-	@Override
 	public String getTable() {
 		return "DEMO_ORDERS";
 	}
-	@Override
+
 	public String getPrimaryKey() {
 		return "ORDER_ID";
 	}
