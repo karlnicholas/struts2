@@ -20,9 +20,9 @@ import javax.naming.NamingException;
 import oracle.jdbc.*;
 import struts2.model.Customer;
 
-public class HRService extends ServiceBase {
+public class SalesService extends ServiceBase {
 
-	public HRService() throws NamingException, SQLException {
+	public SalesService() throws NamingException, SQLException {
 		super();
 	}
 

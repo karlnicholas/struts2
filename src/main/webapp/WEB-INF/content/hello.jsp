@@ -24,7 +24,13 @@
     </li>
 </ul>
 <br>
-    <s:url id="url" action="customers" />
-    <s:a href="%{url}">customers</s:a>
+    <s:url id="url" action="sales" />
+    <s:a href="%{url}">sales</s:a>
+<br>
+    <s:url id="url" action="shipping" />
+    <s:a href="%{url}">shipping</s:a>
+<br>
+    <s:url id="url" action="management" />
+    <s:a href="%{url}">management</s:a>
 </body>
 </html>

@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import struts2.service.HRService;
+import struts2.service.SalesService;
 
 @Action(value="customerDelete", results={@Result(name = ActionSupport.SUCCESS, location = "customers", type = "redirectAction")})
 public class CustomerDeleteAction extends ActionSupport {
@@ -22,7 +22,7 @@ public class CustomerDeleteAction extends ActionSupport {
 	}
 
     public String execute() throws Exception {
-    	HRService hrService = new HRService();
+    	SalesService hrService = new SalesService();
     	hrService.deleteCustomer(new BigDecimal(empNo));
     	hrService.closeConn();
         return SUCCESS;

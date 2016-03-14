@@ -21,7 +21,7 @@ import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 
 import struts2.model.Customer;
-import struts2.service.HRService;
+import struts2.service.SalesService;
 
 @Action(value="customerCreate", results={@Result(name = ActionSupport.SUCCESS, location = "customers", type = "redirectAction")})
 public class CustomerCreateAction extends ActionSupport {
@@ -31,7 +31,7 @@ public class CustomerCreateAction extends ActionSupport {
     public String execute() throws Exception {
     	if ( customer == null ) return SUCCESS;
 
-    	HRService hrService = new HRService();
+    	SalesService hrService = new SalesService();
     	hrService.createCustomer(customer);
     	hrService.closeConn();
         return SUCCESS;
